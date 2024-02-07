@@ -1,4 +1,4 @@
-const {create} =require("./userservice");
+const {create,getUserByUserId,getUsers,updateUser,deleteUser} =require("./userservice");
 
 const {genSaltSync,hashSync} = require("bcrypt");
 
