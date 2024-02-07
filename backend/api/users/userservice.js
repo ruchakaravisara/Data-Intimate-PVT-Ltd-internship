@@ -18,5 +18,17 @@ module.exports ={
                 return callBack(null,results);
             }
         );
-    }
+    },
+    getUsers: callBack => {
+        pool.query(
+          `select id,firstName,lastName,gender,email,number from registration`,
+          [],
+          (error, results, fields) => {
+            if (error) {
+              callBack(error);
+            }
+            return callBack(null, results);
+          }
+        );
+      }
 }
