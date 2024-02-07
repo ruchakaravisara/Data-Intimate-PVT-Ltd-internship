@@ -45,10 +45,10 @@ module.exports ={
       },
       updateUser: (data, callBack) => {
         pool.query(
-          `update registration set firstName=?, lastName=?, gender=?, email=?, password=?, number=? where id = ?`,
+          `update registration set firstName= ? , lastName= ? , gender=?, email=?, password=?, number=? where id = ?`,
           [
-            data.first_name,
-            data.last_name,
+            data.firstname,
+            data.lastname,
             data.gender,
             data.email,
             data.password,
@@ -59,7 +59,7 @@ module.exports ={
             if (error) {
               callBack(error);
             }
-            return callBack(null, results[0]);
+            return callBack(null, results);
           }
         );
       },
@@ -70,6 +70,18 @@ module.exports ={
           (error, results, fields) => {
             if (error) {
               callBack(error);
+            }
+            return callBack(null, results[0]);
+          }
+        );
+      },
+      getUserByUserEmail: (email, callBack) => {
+        pool.query(
+          `select * from registration where email = ?`,
+          [email],
+          (error, results, fields) => {
+            if (error) {
+             return callBack(error);
             }
             return callBack(null, results[0]);
           }
