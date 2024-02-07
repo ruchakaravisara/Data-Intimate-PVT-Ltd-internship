@@ -1,9 +1,11 @@
 const {create} =require("./userservice");
 
+const {genSaltSync,hashSync} = require("bcrypt");
+
 module.exports ={
     createUser:(req,res)=>{
         const body =req.body;
-        const salt = getSaltSync(10)
+        const salt = genSaltSync(10)
         body.password =hashSync(body.password,salt);
         create(body,(err,results)=>{
             if(err){
